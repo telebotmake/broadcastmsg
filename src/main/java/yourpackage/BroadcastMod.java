@@ -31,7 +31,8 @@ public class BroadcastMod implements ModInitializer {
             server.getCommandManager().executeWithPrefix(context.getSource(), command);
         }
 
-        context.getSource().sendFeedback(Text.literal("پیام \"" + message + "\" به همه ارسال شد!"), false);
+        // اصلاح شده با Supplier<Text>
+        context.getSource().sendFeedback(() -> Text.literal("پیام \"" + message + "\" به همه ارسال شد!"), false);
 
         return 1;
     }
