@@ -20,4 +20,11 @@ dependencies {
 
 loom {
     splitEnvironmentSourceSets()
+
+    mods {
+        broadcastmod {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
 }
