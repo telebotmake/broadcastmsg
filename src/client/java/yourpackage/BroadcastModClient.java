@@ -12,6 +12,15 @@ public class BroadcastModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        // پیام تست در چت نشون بده برای اطمینان از اجرای مود
+        MinecraftClient.getInstance().execute(() -> {
+            if (MinecraftClient.getInstance().player != null) {
+                MinecraftClient.getInstance().inGameHud.getChatHud()
+                        .addMessage(Text.literal("✅ مود Broadcast فعال شد!"));
+            }
+        });
+
+        // ثبت دستور /broadcast-ip
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             dispatcher.register(
                 literal("broadcast-ip").executes(context -> {
@@ -26,7 +35,7 @@ public class BroadcastModClient implements ClientModInitializer {
                         client.player.networkHandler.sendChatMessage("/msg " + playerName + " بیا 5.10.248.159");
                     }
 
-                    client.inGameHud.getChatHud().addMessage(Text.literal("پیام برای همه ارسال شد!"));
+                    client.inGameHud.getChatHud().addMessage(Text.literal("📢 پیام برای همه ارسال شد."));
                     return 1;
                 })
             );
