@@ -8,7 +8,7 @@ import net.minecraft.text.Text;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
-public class BroadcastMod implements ClientModInitializer {
+public class BroadcastModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
