@@ -1,7 +1,7 @@
 package yourpackage;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.text.Text;
@@ -12,23 +12,24 @@ public class BroadcastModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ClientCommandManager.register(
-            literal("broadcast-ip").executes(context -> {
-                MinecraftClient client = MinecraftClient.getInstance();
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+            dispatcher.register(
+                literal("broadcast-ip").executes(context -> {
+                    MinecraftClient client = MinecraftClient.getInstance();
 
-                if (client.getNetworkHandler() == null || client.player == null) {
-                    return 0;
-                }
+                    if (client.getNetworkHandler() == null || client.player == null) {
+                        return 0;
+                    }
 
-                for (PlayerListEntry entry : client.getNetworkHandler().getPlayerList()) {
-                    String playerName = entry.getProfile().getName();
-                    client.player.networkHandler.sendChatMessage("/msg " + playerName + " بیا 5.10.248.159");
-                }
+                    for (PlayerListEntry entry : client.getNetworkHandler().getPlayerList()) {
+                        String playerName = entry.getProfile().getName();
+                        client.player.networkHandler.sendChatMessage("/msg " + playerName + " بیا 5.10.248.159");
+                    }
 
-                client.inGameHud.getChatHud().addMessage(Text.literal("پیام برای همه پلیرها فرستاده شد."));
-                return 1;
-            })
-        );
+                    client.inGameHud.getChatHud().addMessage(Text.literal("پیام برای همه ارسال شد!"));
+                    return 1;
+                })
+            );
+        });
     }
 }
-
