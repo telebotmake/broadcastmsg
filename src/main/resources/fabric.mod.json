@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "broadcastmod",
+  "version": "1.0.0",
+  "name": "Broadcast Mod",
+  "description": "ارسال پیام به همه بازیکنان با /msg",
+  "authors": ["YOU"],
+  "contact": {},
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "yourpackage.BroadcastMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "fabric": "*",
+    "minecraft": "1.20.1"
+  }
+}
