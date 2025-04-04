@@ -12,7 +12,7 @@ public class BroadcastModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ClientCommandManager.DISPATCHER.register(
+        ClientCommandManager.register(
             literal("broadcast-ip").executes(context -> {
                 MinecraftClient client = MinecraftClient.getInstance();
 
@@ -22,7 +22,7 @@ public class BroadcastModClient implements ClientModInitializer {
 
                 for (PlayerListEntry entry : client.getNetworkHandler().getPlayerList()) {
                     String playerName = entry.getProfile().getName();
-                    client.player.sendChatMessage("/msg " + playerName + " بیا 5.10.248.159");
+                    client.player.networkHandler.sendChatMessage("/msg " + playerName + " بیا 5.10.248.159");
                 }
 
                 client.inGameHud.getChatHud().addMessage(Text.literal("پیام برای همه پلیرها فرستاده شد."));
